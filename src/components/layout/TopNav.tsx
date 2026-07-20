@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { cn } from '@/lib/utils'
+import { EditorLoginDialog, RoleBadge } from '@/components/auth/EditorLoginDialog'
+import { LanguageToggle } from '@/components/layout/LanguageToggle'
+import { useAuth } from '@/contexts/AuthContext'
+import { useTranslation } from '@/contexts/LanguageContext'
 import { useSearchOverlay } from '@/contexts/SearchContext'
+import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
-  { to: '/', label: 'Discover' },
-  { to: '/rankings', label: 'Rankings' },
-] as const
+  { to: '/', key: 'discover' as const },
+  { to: '/rankings', key: 'rankings' as const },
+]
 
 export function TopNav() {
   const location = useLocation()
   const { openSearch } = useSearchOverlay()
+  const { isEditor, isAuthenticated, logout } = useAuth()
+  const { t } = useTranslation()
   const [scrolled, setScrolled] = useState(false)
+  const [loginOpen, setLoginOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -32,7 +39,7 @@ export function TopNav() {
           YTMAG AI
         </Link>
         <div className="hidden md:flex items-center space-x-8">
-          {NAV_LINKS.map(({ to, label }) => {
+          {NAV_LINKS.map(({ to, key }) => {
             const active = location.pathname === to
             return (
               <Link
@@ -45,25 +52,50 @@ export function TopNav() {
                     : 'text-muted hover:text-primary',
                 )}
               >
-                {label}
+                {t.nav[key]}
               </Link>
             )
           })}
         </div>
-        <div className="flex items-center space-x-4 text-primary">
+        <div className="flex items-center space-x-3 md:space-x-4 text-primary">
+          <RoleBadge className="hidden sm:inline-flex" />
+          <LanguageToggle />
+          {isAuthenticated && (
+            <button
+              type="button"
+              onClick={() => logout()}
+              className="text-label-sm text-muted hover:text-primary transition-colors"
+            >
+              {t.auth.logout}
+            </button>
+          )}
+          {isAuthenticated && !isEditor && (
+            <button
+              type="button"
+              onClick={() => setLoginOpen(true)}
+              className="text-label-sm text-muted hover:text-gold transition-colors"
+            >
+              {t.auth.login}
+            </button>
+          )}
           <button
             type="button"
             onClick={openSearch}
             className="hover:opacity-80 transition-opacity"
-            aria-label="Search"
+            aria-label={t.nav.search}
           >
             <span className="material-symbols-outlined">search</span>
           </button>
-          <button type="button" className="hover:opacity-80 transition-opacity" aria-label="Notifications">
+          <button
+            type="button"
+            className="hover:opacity-80 transition-opacity hidden sm:block"
+            aria-label={t.nav.notifications}
+          >
             <span className="material-symbols-outlined">notifications</span>
           </button>
         </div>
       </div>
+      <EditorLoginDialog open={loginOpen} onClose={() => setLoginOpen(false)} />
     </nav>
   )
 }

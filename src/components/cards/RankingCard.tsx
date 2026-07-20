@@ -1,3 +1,5 @@
+import { useTranslation } from '@/contexts/LanguageContext'
+import { translateCategory } from '@/i18n/locales'
 import { formatNumber } from '@/lib/utils'
 import type { RankingItem } from '@/types'
 import { cn } from '@/lib/utils'
@@ -26,6 +28,7 @@ function Sparkline({ data }: { data: number[] }) {
 }
 
 export function RankingCard({ item, className }: RankingCardProps) {
+  const { t, locale } = useTranslation()
   const isTop = item.rank === 1
   const rankDisplay = item.rank.toString().padStart(2, '0')
   const growthPositive = item.growthPercent >= 0
@@ -64,18 +67,20 @@ export function RankingCard({ item, className }: RankingCardProps) {
           <h3 className={cn('font-display text-primary leading-tight', isTop ? 'text-headline-lg' : 'text-headline-lg-mobile')}>
             {item.channelTitle}
           </h3>
-          <p className="text-label-sm text-muted uppercase tracking-wider mt-1">{item.category}</p>
+          <p className="text-label-sm text-muted uppercase tracking-wider mt-1">
+            {translateCategory(locale, item.category)}
+          </p>
         </div>
       </div>
       <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full items-center">
         <div>
-          <p className="text-label-sm text-muted uppercase tracking-wider mb-1">Subscribers</p>
+          <p className="text-label-sm text-muted uppercase tracking-wider mb-1">{t.rankings.subscribers}</p>
           <p className={cn('text-primary', isTop ? 'font-display text-headline-lg-mobile' : 'font-body text-body-md font-medium')}>
             {formatNumber(item.subscriberCount)}
           </p>
         </div>
         <div>
-          <p className="text-label-sm text-muted uppercase tracking-wider mb-1">30D Growth</p>
+          <p className="text-label-sm text-muted uppercase tracking-wider mb-1">{t.rankings.growth30d}</p>
           <div className={cn('flex items-center gap-1', growthPositive ? 'text-[#22c55e]' : 'text-on-tertiary-container')}>
             <span className="material-symbols-outlined text-[20px]">
               {growthPositive ? 'arrow_upward' : 'arrow_downward'}
@@ -89,7 +94,7 @@ export function RankingCard({ item, className }: RankingCardProps) {
         <div className="relative">
           <p className="text-label-sm text-muted uppercase tracking-wider mb-1 flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">auto_awesome</span>
-            AI Quality
+            {t.rankings.aiQuality}
           </p>
           <div className="flex items-end gap-1">
             <span className={cn('text-primary', isTop ? 'font-display text-headline-lg-mobile' : 'font-body text-body-md font-medium')}>

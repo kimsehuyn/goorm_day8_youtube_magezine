@@ -45,9 +45,19 @@ const editorialSchema = {
   },
 }
 
-function buildPrompt(video: Video): string {
+function buildPrompt(video: Video, lang: 'en' | 'ko' = 'en'): string {
+  const languageInstruction =
+    lang === 'ko'
+      ? 'Write ALL text content in Korean (한국어). Use a premium magazine tone suitable for Korean readers.'
+      : 'Write in an editorial GQ/Esquire tone in English.'
+
+  const categoryList =
+    lang === 'ko'
+      ? 'Technology, AI, Finance, Lifestyle, Gaming, Travel, Music, Design, Culture (return category key in English)'
+      : 'Technology, AI, Finance, Lifestyle, Gaming, Travel, Music, Design, Culture'
+
   return `You are the AI editor of YTMAG AI, a premium digital magazine covering YouTube culture.
-Transform this YouTube video into a magazine article. Write in an editorial GQ/Esquire tone.
+Transform this YouTube video into a magazine article. ${languageInstruction}
 
 Video Title: ${video.title}
 Channel: ${video.channelTitle}
@@ -68,12 +78,20 @@ Requirements:
 - aiOpinion: editor's comment (2-3 sentences, opinionated)
 - audience: who should watch this
 - keyQuotes: 1-2 pull quotes derived from the content
-- category: one of Technology, AI, Finance, Lifestyle, Gaming, Travel, Music, Design, Culture
+- category: one of ${categoryList}
 - qualityScore: 0-100 quality assessment
 - editorialBody: 3-4 paragraphs of magazine prose expanding on the video`
 }
 
-export async function generateEditorial(video: Video): Promise<EditorialArticle> {
+export async function generateEditorial(
+  video: Video,
+  lang: 'en' | 'ko' = 'en',
+): Promise<EditorialArticle> {
+  const systemMessage =
+    lang === 'ko'
+      ? 'You are a world-class magazine editor fluent in Korean. Respond only with valid JSON matching the schema. All string values must be in Korean except the category field which must remain in English.'
+      : 'You are a world-class magazine editor. Respond only with valid JSON matching the schema.'
+
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -85,10 +103,9 @@ export async function generateEditorial(video: Video): Promise<EditorialArticle>
       messages: [
         {
           role: 'system',
-          content:
-            'You are a world-class magazine editor. Respond only with valid JSON matching the schema.',
+          content: systemMessage,
         },
-        { role: 'user', content: buildPrompt(video) },
+        { role: 'user', content: buildPrompt(video, lang) },
       ],
       response_format: {
         type: 'json_schema',

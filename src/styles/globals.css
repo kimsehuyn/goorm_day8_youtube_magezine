@@ -232,4 +232,8 @@
   .result-item:nth-child(6) {
     animation-delay: 0.35s;
   }
+
+  .editor-input {
+    @apply w-full px-4 py-3 rounded-lg border border-border bg-surface-container-lowest text-body-md focus:outline-none focus:border-gold;
+  }
 }

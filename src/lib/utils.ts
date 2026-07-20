@@ -11,8 +11,8 @@ export function formatNumber(value: number): string {
   return value.toLocaleString()
 }
 
-export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('en-US', {
+export function formatDate(dateString: string, locale = 'en-US'): string {
+  return new Date(dateString).toLocaleDateString(locale, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',

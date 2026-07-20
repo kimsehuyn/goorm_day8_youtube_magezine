@@ -1,23 +1,25 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useTranslation } from '@/contexts/LanguageContext'
 import { cn } from '@/lib/utils'
 
 const SIDE_LINKS = [
-  { to: '/', label: 'Home', icon: 'home' },
-  { to: '/rankings', label: 'Trending', icon: 'trending_up' },
+  { to: '/', key: 'home' as const, icon: 'home' },
+  { to: '/rankings', key: 'trending' as const, icon: 'trending_up' },
 ] as const
 
 export function SideNav() {
   const location = useLocation()
+  const { t } = useTranslation()
 
   return (
     <aside className="hidden lg:flex flex-col border-r border-outline-variant h-screen w-64 fixed left-0 top-0 bg-background z-40 pt-24 pb-8 justify-between">
       <div className="px-4">
         <div className="mb-8 px-4">
-          <h2 className="font-display text-headline-lg text-gold mb-1">YTMAG</h2>
-          <p className="text-label-sm text-muted uppercase tracking-widest">AI Editorial</p>
+          <h2 className="font-display text-headline-lg text-gold mb-1">{t.sideNav.brand}</h2>
+          <p className="text-label-sm text-muted uppercase tracking-widest">{t.sideNav.subtitle}</p>
         </div>
         <nav className="space-y-2">
-          {SIDE_LINKS.map(({ to, label, icon }) => {
+          {SIDE_LINKS.map(({ to, key, icon }) => {
             const active = location.pathname === to
             return (
               <Link
@@ -33,7 +35,7 @@ export function SideNav() {
                 <span className={cn('material-symbols-outlined', active && 'material-symbols-filled')}>
                   {icon}
                 </span>
-                {label}
+                {t.sideNav[key]}
               </Link>
             )
           })}
@@ -44,7 +46,7 @@ export function SideNav() {
           type="button"
           className="w-full py-3 bg-primary text-on-primary text-label-md rounded-lg hover:scale-[1.02] transition-transform shadow-[0_20px_40px_rgba(0,0,0,0.04)]"
         >
-          Subscribe Now
+          {t.sideNav.subscribe}
         </button>
       </div>
     </aside>

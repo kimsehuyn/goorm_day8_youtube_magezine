@@ -65,6 +65,20 @@ export interface EditorialResponse {
   video: Video
   article: EditorialArticle
   cached: boolean
+  source?: 'editor' | 'cache' | 'generated'
+}
+
+export type UserRole = 'reader' | 'editor'
+
+export interface AuthSession {
+  token: string
+  role: UserRole
+  expiresAt: string
+}
+
+export interface AuthMeResponse {
+  role: UserRole | null
+  authenticated: boolean
 }
 
 export interface RankingsResponse {

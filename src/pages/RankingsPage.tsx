@@ -3,12 +3,18 @@ import { useQuery } from '@tanstack/react-query'
 import { RankingCard } from '@/components/cards/RankingCard'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useTranslation } from '@/contexts/LanguageContext'
+import {
+  getRankingFilterLabel,
+  RANKING_FILTER_KEYS,
+  type RankingFilterKey,
+} from '@/i18n/locales'
 import { api } from '@/lib/api'
 import { cn } from '@/lib/utils'
-import { RANKING_FILTERS, type RankingFilter } from '@/types'
 
 export function RankingsPage() {
-  const [filter, setFilter] = useState<RankingFilter>('Global')
+  const { t, locale } = useTranslation()
+  const [filter, setFilter] = useState<RankingFilterKey>('Global')
   const [limit, setLimit] = useState(20)
 
   const { data, isLoading, error, isFetching } = useQuery({
@@ -20,16 +26,13 @@ export function RankingsPage() {
   return (
     <main className="pt-12 pb-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
       <header className="mb-16 max-w-3xl">
-        <h1 className="font-display text-display-xl text-primary mb-6">Global Power Index</h1>
-        <p className="text-body-lg text-on-surface-variant">
-          The definitive ranking of digital influence, curated by our proprietary AI model assessing
-          reach, engagement velocity, and editorial quality score.
-        </p>
+        <h1 className="font-display text-display-xl text-primary mb-6">{t.rankings.title}</h1>
+        <p className="text-body-lg text-on-surface-variant">{t.rankings.description}</p>
       </header>
 
       <div className="flex flex-wrap items-center justify-between gap-6 mb-12 pb-6 border-b border-outline-variant/50">
         <div className="flex gap-4 flex-wrap">
-          {RANKING_FILTERS.map((item) => (
+          {RANKING_FILTER_KEYS.map((item) => (
             <button
               key={item}
               type="button"
@@ -44,13 +47,13 @@ export function RankingsPage() {
                   : 'border-border text-on-surface-variant hover:border-primary',
               )}
             >
-              {item}
+              {getRankingFilterLabel(locale, item)}
             </button>
           ))}
         </div>
         <div className="flex items-center gap-2 text-on-surface-variant text-label-sm">
           <span className="material-symbols-outlined text-gold">update</span>
-          {isFetching ? 'Updating...' : 'Updated Real-Time'}
+          {isFetching ? t.rankings.updating : t.rankings.updatedRealtime}
         </div>
       </div>
 
@@ -80,7 +83,7 @@ export function RankingsPage() {
             onClick={() => setLimit((prev) => prev + 20)}
             disabled={isFetching}
           >
-            Load Next 20
+            {t.rankings.loadNext}
             <span className="material-symbols-outlined">expand_more</span>
           </Button>
         </div>

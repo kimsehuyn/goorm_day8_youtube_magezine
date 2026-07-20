@@ -1,5 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { getTranslations } from '@/i18n/locales'
 
 interface Props {
   children: ReactNode
@@ -8,6 +9,16 @@ interface Props {
 interface State {
   hasError: boolean
   message?: string
+}
+
+function readErrorLocale(): 'en' | 'ko' {
+  try {
+    const stored = localStorage.getItem('ytmag-locale')
+    if (stored === 'ko') return 'ko'
+  } catch {
+    /* ignore */
+  }
+  return 'en'
 }
 
 export class ErrorBoundary extends Component<Props, State> {
@@ -23,12 +34,13 @@ export class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
+      const t = getTranslations(readErrorLocale())
       return (
         <main className="min-h-[60vh] flex flex-col items-center justify-center px-margin-mobile text-center">
-          <h1 className="font-display text-headline-xl text-primary mb-4">Something went wrong</h1>
+          <h1 className="font-display text-headline-xl text-primary mb-4">{t.error.title}</h1>
           <p className="text-muted mb-8 max-w-md">{this.state.message}</p>
           <Link to="/" className="text-gold hover:text-primary transition-colors">
-            Return to homepage
+            {t.error.returnHome}
           </Link>
         </main>
       )

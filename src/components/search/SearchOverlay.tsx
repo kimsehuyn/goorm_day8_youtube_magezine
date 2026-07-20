@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArticleCard } from '@/components/cards/ArticleCard'
+import { useTranslation } from '@/contexts/LanguageContext'
 import { useSearchOverlay } from '@/contexts/SearchContext'
 import { api } from '@/lib/api'
 import { addSearchHistory, getSearchHistory } from '@/lib/utils'
-import { TRENDING_TOPICS } from '@/types'
 
 function useDebouncedValue<T>(value: T, delay: number): T {
   const [debounced, setDebounced] = useState(value)
@@ -19,6 +19,7 @@ function useDebouncedValue<T>(value: T, delay: number): T {
 
 export function SearchOverlay() {
   const { isOpen, closeSearch } = useSearchOverlay()
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [history, setHistory] = useState<string[]>([])
@@ -36,14 +37,10 @@ export function SearchOverlay() {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeSearch()
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault()
-        if (isOpen) closeSearch()
-      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [isOpen, closeSearch])
+  }, [closeSearch])
 
   const { data, isLoading } = useQuery({
     queryKey: ['search', debouncedQuery],
@@ -78,13 +75,13 @@ export function SearchOverlay() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   className="w-full bg-transparent border-none font-display text-display-xl text-primary pl-14 py-4 placeholder:font-display focus:ring-0 outline-none"
-                  placeholder="Search YTMAG..."
+                  placeholder={t.search.placeholder}
                   type="text"
                 />
               </div>
               <button
                 type="button"
-                aria-label="Close search"
+                aria-label={t.search.close}
                 onClick={closeSearch}
                 className="shrink-0 p-4 rounded-full hover:bg-surface-container transition-colors group flex items-center justify-center border border-outline-variant/50"
               >
@@ -100,7 +97,7 @@ export function SearchOverlay() {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter w-full">
                 <div className="md:col-span-4 flex flex-col gap-12">
                   <section>
-                    <h3 className="text-label-md text-muted uppercase tracking-widest mb-6">Recent History</h3>
+                    <h3 className="text-label-md text-muted uppercase tracking-widest mb-6">{t.search.recentHistory}</h3>
                     {history.length ? (
                       <ul className="flex flex-col gap-4">
                         {history.map((item) => (
@@ -119,13 +116,13 @@ export function SearchOverlay() {
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-muted text-body-md">No recent searches yet.</p>
+                      <p className="text-muted text-body-md">{t.search.noHistory}</p>
                     )}
                   </section>
                   <section>
-                    <h3 className="text-label-md text-muted uppercase tracking-widest mb-6">Trending Topics</h3>
+                    <h3 className="text-label-md text-muted uppercase tracking-widest mb-6">{t.search.trendingTopics}</h3>
                     <div className="flex flex-wrap gap-3">
-                      {TRENDING_TOPICS.map((topic) => (
+                      {t.trendingTopics.map((topic) => (
                         <button
                           key={topic}
                           type="button"
@@ -139,35 +136,31 @@ export function SearchOverlay() {
                   </section>
                 </div>
                 <div className="md:col-span-8 flex flex-col gap-8 md:pl-12 border-t md:border-t-0 md:border-l border-surface-variant pt-12 md:pt-0">
-                  <h3 className="text-label-md text-muted uppercase tracking-widest mb-2">Curated Collections</h3>
-                  <p className="text-body-md text-muted">
-                    Search for any YouTube topic to discover AI-curated magazine stories.
-                  </p>
+                  <h3 className="text-label-md text-muted uppercase tracking-widest mb-2">{t.search.curatedCollections}</h3>
+                  <p className="text-body-md text-muted">{t.search.curatedHint}</p>
                 </div>
               </div>
             ) : (
               <div className="w-full flex flex-col gap-12">
                 <div className="flex items-center justify-between border-b border-surface-variant pb-4">
                   <h2 className="text-body-lg text-muted">
-                    Results for <span className="text-primary font-medium">"{debouncedQuery}"</span>
+                    {t.search.resultsFor}{' '}
+                    <span className="text-primary font-medium">"{debouncedQuery}"</span>
                   </h2>
-                  {isLoading && <span className="text-label-sm text-muted">Searching...</span>}
+                  {isLoading && <span className="text-label-sm text-muted">{t.search.searching}</span>}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8">
                   {data?.videos.map((video) => (
-                    <div
+                    <ArticleCard
                       key={video.id}
-                      onClick={() => handleSelect(video.id, debouncedQuery)}
-                      onKeyDown={(e) => e.key === 'Enter' && handleSelect(video.id, debouncedQuery)}
-                      role="button"
-                      tabIndex={0}
-                    >
-                      <ArticleCard video={video} variant="grid" />
-                    </div>
+                      video={video}
+                      variant="grid"
+                      onSelect={() => handleSelect(video.id, debouncedQuery)}
+                    />
                   ))}
                 </div>
                 {!isLoading && data?.videos.length === 0 && (
-                  <p className="text-muted text-center py-12">No results found.</p>
+                  <p className="text-muted text-center py-12">{t.search.noResults}</p>
                 )}
               </div>
             )}

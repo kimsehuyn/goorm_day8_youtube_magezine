@@ -1,9 +1,17 @@
 import 'dotenv/config'
 import cors from 'cors'
 import express from 'express'
+import {
+  getRoleFromToken,
+  isReaderAuthConfigured,
+  loginWithSecretKey,
+  logoutSession,
+  verifyEditorToken,
+} from './lib/auth.js'
 import { CACHE_TTL, getCache, setCache } from './lib/cache.js'
-import { generateEditorial } from './lib/editorial.js'
+import { resolveEditorial, removeEditorial, upsertEditorial } from './lib/editorial-service.js'
 import { buildRankings } from './lib/rankings.js'
+import type { EditorialArticle } from './lib/youtube.js'
 import {
   getTrendingVideos,
   getVideoById,
@@ -15,6 +23,34 @@ const PORT = 3001
 
 app.use(cors())
 app.use(express.json())
+
+app.post('/api/auth/login', (req, res) => {
+  try {
+    if (!isReaderAuthConfigured()) {
+      res.status(503).json({ error: 'Reader authentication is not configured' })
+      return
+    }
+    const secretKey = String(req.body?.secretKey || '')
+    const session = loginWithSecretKey(secretKey)
+    if (!session) {
+      res.status(401).json({ error: 'Invalid access key' })
+      return
+    }
+    res.json(session)
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message })
+  }
+})
+
+app.get('/api/auth/me', (req, res) => {
+  const role = getRoleFromToken(req.headers.authorization)
+  res.json({ role, authenticated: role !== null })
+})
+
+app.delete('/api/auth/login', (req, res) => {
+  logoutSession(req.headers.authorization)
+  res.json({ ok: true })
+})
 
 app.get('/api/youtube/search', async (req, res) => {
   try {
@@ -82,14 +118,33 @@ app.get('/api/youtube/video/:id', async (req, res) => {
 app.get('/api/editorial/generate', async (req, res) => {
   try {
     const videoId = String(req.query.videoId || '')
+    const lang = req.query.lang === 'ko' ? 'ko' : 'en'
     if (!videoId) {
       res.status(400).json({ error: 'videoId is required' })
       return
     }
-    const cacheKey = `editorial:${videoId}`
-    const cached = getCache<{ video: unknown; article: unknown; cached: boolean }>(cacheKey)
-    if (cached) {
-      res.json({ ...cached, cached: true })
+    const result = await resolveEditorial(videoId, lang)
+    if (!result) {
+      res.status(404).json({ error: 'Video not found' })
+      return
+    }
+    res.json(result)
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message })
+  }
+})
+
+app.put('/api/editorial/manage', async (req, res) => {
+  if (!verifyEditorToken(req.headers.authorization)) {
+    res.status(403).json({ error: 'Editor access required' })
+    return
+  }
+  try {
+    const videoId = String(req.query.videoId || '')
+    const lang = req.query.lang === 'ko' ? 'ko' : 'en'
+    const article = req.body?.article as EditorialArticle
+    if (!videoId || !article?.headline) {
+      res.status(400).json({ error: 'Invalid request' })
       return
     }
     const video = await getVideoById(videoId)
@@ -97,10 +152,28 @@ app.get('/api/editorial/generate', async (req, res) => {
       res.status(404).json({ error: 'Video not found' })
       return
     }
-    const article = await generateEditorial(video)
-    const payload = { video, article, cached: false }
-    setCache(cacheKey, payload, CACHE_TTL.editorial)
-    res.json(payload)
+    upsertEditorial(videoId, lang, article)
+    res.json({ video, article, cached: true, source: 'editor' })
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message })
+  }
+})
+
+app.delete('/api/editorial/manage', async (req, res) => {
+  if (!verifyEditorToken(req.headers.authorization)) {
+    res.status(403).json({ error: 'Editor access required' })
+    return
+  }
+  try {
+    const videoId = String(req.query.videoId || '')
+    const lang = req.query.lang === 'ko' ? 'ko' : 'en'
+    if (!videoId) {
+      res.status(400).json({ error: 'videoId is required' })
+      return
+    }
+    removeEditorial(videoId, lang)
+    const regenerated = await resolveEditorial(videoId, lang)
+    res.json(regenerated ?? { deleted: true })
   } catch (error) {
     res.status(500).json({ error: (error as Error).message })
   }

@@ -1,5 +1,7 @@
+import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
+import { useTranslation } from '@/contexts/LanguageContext'
 import { formatNumber } from '@/lib/utils'
 import type { Video } from '@/types'
 import { cn } from '@/lib/utils'
@@ -10,6 +12,38 @@ interface ArticleCardProps {
   category?: string
   insightScore?: number
   className?: string
+  onSelect?: (videoId: string) => void
+}
+
+function CardWrapper({
+  videoId,
+  onSelect,
+  className,
+  children,
+}: {
+  videoId: string
+  onSelect?: (videoId: string) => void
+  className?: string
+  children: ReactNode
+}) {
+  if (onSelect) {
+    return (
+      <div
+        role="button"
+        tabIndex={0}
+        className={className}
+        onClick={() => onSelect(videoId)}
+        onKeyDown={(e) => e.key === 'Enter' && onSelect(videoId)}
+      >
+        {children}
+      </div>
+    )
+  }
+  return (
+    <Link to={`/article/${videoId}`} className={className}>
+      {children}
+    </Link>
+  )
 }
 
 export function ArticleCard({
@@ -18,11 +52,16 @@ export function ArticleCard({
   category,
   insightScore,
   className,
+  onSelect,
 }: ArticleCardProps) {
+  const { t } = useTranslation()
+  const displayCategory = category || t.cards.analysis
+
   if (variant === 'featured') {
     return (
-      <Link
-        to={`/article/${video.id}`}
+      <CardWrapper
+        videoId={video.id}
+        onSelect={onSelect}
         className={cn(
           'md:col-span-8 row-span-2 group cursor-pointer relative rounded-xl overflow-hidden bg-surface shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-border flex flex-col justify-end',
           className,
@@ -38,11 +77,11 @@ export function ArticleCard({
         </div>
         <div className="relative z-10 p-8">
           <div className="flex justify-between items-start mb-4">
-            <Badge>{category || 'Featured'}</Badge>
+            <Badge>{displayCategory}</Badge>
             {insightScore != null && (
               <div className="bg-surface/20 backdrop-blur-md border border-white/20 px-3 py-1 rounded flex items-center gap-1">
                 <span className="material-symbols-outlined text-white text-xs">analytics</span>
-                <span className="text-label-sm text-white">{insightScore} Insight Score</span>
+                <span className="text-label-sm text-white">{insightScore} {t.cards.insightScore}</span>
               </div>
             )}
           </div>
@@ -53,14 +92,15 @@ export function ArticleCard({
             {video.description}
           </p>
         </div>
-      </Link>
+      </CardWrapper>
     )
   }
 
   if (variant === 'compact') {
     return (
-      <Link
-        to={`/article/${video.id}`}
+      <CardWrapper
+        videoId={video.id}
+        onSelect={onSelect}
         className={cn(
           'group cursor-pointer bg-surface rounded-xl border border-border overflow-hidden flex shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-transform duration-300',
           className,
@@ -75,25 +115,26 @@ export function ArticleCard({
         </div>
         <div className="w-3/5 p-5 flex flex-col justify-center">
           <Badge variant="gold" className="mb-2 w-fit">
-            {category || 'Video'}
+            {displayCategory}
           </Badge>
           <h4 className="font-display text-headline-lg-mobile text-primary leading-tight mb-2 group-hover:text-gold transition-colors line-clamp-2">
             {video.title}
           </h4>
           <p className="text-label-sm text-muted line-clamp-2">{video.channelTitle}</p>
         </div>
-      </Link>
+      </CardWrapper>
     )
   }
 
   return (
-    <Link
-      to={`/article/${video.id}`}
+    <CardWrapper
+      videoId={video.id}
+      onSelect={onSelect}
       className={cn('result-item flex flex-col gap-4 group cursor-pointer', className)}
     >
       <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-surface-container">
         <div className="absolute top-4 left-4 z-10">
-          <Badge>{category || 'Analysis'}</Badge>
+          <Badge>{displayCategory}</Badge>
         </div>
         <img
           src={video.thumbnailUrl}
@@ -105,7 +146,7 @@ export function ArticleCard({
         <div className="flex items-center gap-3 text-muted text-label-sm">
           <span>{video.channelTitle}</span>
           <span className="w-1 h-1 rounded-full bg-outline-variant" />
-          <span>{formatNumber(video.viewCount)} views</span>
+          <span>{formatNumber(video.viewCount)} {t.search.views}</span>
         </div>
         <h3 className="font-display text-headline-lg-mobile text-primary group-hover:text-gold transition-colors line-clamp-2">
           {video.title}
@@ -114,6 +155,6 @@ export function ArticleCard({
           {video.description}
         </p>
       </div>
-    </Link>
+    </CardWrapper>
   )
 }
