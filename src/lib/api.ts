@@ -24,7 +24,11 @@ async function fetchApi<T>(path: string, init?: RequestInit): Promise<T> {
   })
   if (!response.ok) {
     const error = await response.text()
-    throw new Error(error || `Request failed: ${response.status}`)
+    const err = new Error(error || `Request failed: ${response.status}`) as Error & {
+      status: number
+    }
+    err.status = response.status
+    throw err
   }
   return response.json() as Promise<T>
 }

@@ -132,6 +132,7 @@ export interface Translations {
     readerKeyPlaceholder: string
     readerEnter: string
     readerLoginError: string
+    readerAuthNotConfigured: string
     editorHint: string
   }
 }
@@ -286,6 +287,7 @@ export const en: Translations = {
     readerKeyPlaceholder: 'Enter reader access key',
     readerEnter: 'Enter Magazine',
     readerLoginError: 'Invalid reader access key',
+    readerAuthNotConfigured: 'Server authentication is not configured. Please contact the administrator.',
     editorHint: 'Editors can sign in with their editor key here too.',
   },
 }
@@ -440,6 +442,7 @@ export const ko: Translations = {
     readerKeyPlaceholder: '독자키 입력',
     readerEnter: '매거진 입장',
     readerLoginError: '독자키가 올바르지 않습니다',
+    readerAuthNotConfigured: '서버 인증 설정이 되어 있지 않습니다. 관리자에게 문의하세요.',
     editorHint: '편집자는 편집자키로도 입장할 수 있습니다.',
   },
 }

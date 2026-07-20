@@ -17,8 +17,11 @@ export function ReaderGate() {
     try {
       await login(secretKey)
       setSecretKey('')
-    } catch {
-      setError(t.auth.readerLoginError)
+    } catch (err) {
+      const status = (err as Error & { status?: number }).status
+      setError(
+        status === 503 ? t.auth.readerAuthNotConfigured : t.auth.readerLoginError,
+      )
     } finally {
       setLoading(false)
     }
