@@ -3,6 +3,7 @@
     { "source": "/api/youtube/video/:id", "destination": "/api/youtube/video?id=:id" },
     { "source": "/api/editorial/manage", "destination": "/api/editorial/manage" },
     { "source": "/api/auth/login", "destination": "/api/auth/login" },
+    { "source": "/api/auth/me", "destination": "/api/auth/login" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
