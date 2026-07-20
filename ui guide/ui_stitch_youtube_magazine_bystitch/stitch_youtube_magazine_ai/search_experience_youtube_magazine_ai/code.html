@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YTMAG AI - Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#410003",
+                        "surface-container-highest": "#e2e2e2",
+                        "outline-variant": "#c4c7c7",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#000000",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#5f5e5e",
+                        "surface": "#FFFFFF",
+                        "gold": "#E3B341",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "primary-container": "#1c1b1b",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container": "#eeeeee",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary-fixed-variant": "#93000e",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-background": "#1a1c1c",
+                        "on-primary-fixed": "#1c1b1b",
+                        "secondary-container": "#e4e2e1",
+                        "on-tertiary-fixed": "#410003",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-tertiary-container": "#f2403c",
+                        "on-primary": "#ffffff",
+                        "background": "#f9f9f9",
+                        "on-error-container": "#93000a",
+                        "primary": "#000000",
+                        "tertiary-fixed": "#ffdad6",
+                        "tertiary-fixed-dim": "#ffb4ac",
+                        "on-secondary-container": "#656464",
+                        "secondary-fixed": "#e4e2e1",
+                        "surface-bright": "#f9f9f9",
+                        "muted": "#666666",
+                        "on-surface": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2f3131",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-on-surface": "#f1f1f1",
+                        "border": "#ECECEC",
+                        "inverse-primary": "#c8c6c5",
+                        "on-primary-container": "#858383",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "outline": "#747878",
+                        "primary-fixed": "#e5e2e1",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "margin-tablet": "32px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "max-width": "1440px",
+                        "content-width": "1200px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-lg": ["20px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .search-input-wrapper input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .search-input-wrapper input::placeholder {
+            color: #c4c7c7;
+        }
+        
+        /* Smooth reveal animation for results */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .result-item {
+            animation: fadeInUp 0.4s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .result-item:nth-child(1) { animation-delay: 0.1s; }
+        .result-item:nth-child(2) { animation-delay: 0.15s; }
+        .result-item:nth-child(3) { animation-delay: 0.2s; }
+        .result-item:nth-child(4) { animation-delay: 0.25s; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen relative overflow-hidden">
+<!-- TopNavBar Shell (Navigation is active but hidden in overlay mode if intended to be full screen, but we'll include it as a structural anchor and visually suppress it behind the overlay) -->
+<nav aria-hidden="true" class="bg-surface/80 backdrop-blur-xl fixed top-0 w-full z-40 border-b border-outline-variant/30 shadow-sm flex justify-between items-center h-20 px-margin-desktop max-w-max-width mx-auto transition-opacity duration-300 opacity-0 pointer-events-none">
+<div class="font-display-lg text-display-lg tracking-tighter text-primary">YTMAG AI</div>
+</nav>
+<!-- SideNavBar (Suppressed on search overlay) -->
+<!-- Main Search Overlay Canvas -->
+<main class="fixed inset-0 z-50 flex flex-col bg-surface/95 backdrop-blur-3xl w-full h-full overflow-y-auto">
+<!-- Search Header / Input Area -->
+<header class="w-full pt-16 pb-12 px-margin-mobile md:px-margin-desktop border-b border-surface-variant sticky top-0 bg-surface/90 backdrop-blur-md z-10">
+<div class="max-w-content-width mx-auto flex items-center justify-between gap-6 relative">
+<div class="flex-1 search-input-wrapper relative flex items-center">
+<span class="material-symbols-outlined absolute left-0 text-primary opacity-50" data-icon="search" style="font-size: 32px;">search</span>
+<input autofocus="" class="w-full bg-transparent border-none font-display-xl text-display-xl text-primary pl-14 py-4 placeholder:font-display-xl focus:ring-0" id="mainSearchInput" placeholder="Search YTMAG..." type="text"/>
+</div>
+<button aria-label="Close search" class="shrink-0 p-4 rounded-full hover:bg-surface-container transition-colors group flex items-center justify-center border border-outline-variant/50">
+<span class="material-symbols-outlined text-primary group-hover:rotate-90 transition-transform duration-300" data-icon="close">close</span>
+</button>
+</div>
+</header>
+<!-- Search Content Canvas -->
+<div class="flex-1 w-full max-w-content-width mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Default State: Suggestions & History (Visible initially) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter w-full" id="defaultSearchState">
+<!-- Left Column: Quick Links & History -->
+<div class="md:col-span-4 flex flex-col gap-12">
+<!-- Recent History -->
+<section>
+<h3 class="font-label-md text-label-md text-muted uppercase tracking-widest mb-6">Recent History</h3>
+<ul class="flex flex-col gap-4">
+<li>
+<a class="group flex items-center gap-4 py-2 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-outline-variant" data-icon="history">history</span>
+<span class="font-body-md text-on-surface group-hover:text-gold transition-colors">The Future of Generative Video</span>
+</a>
+</li>
+<li>
+<a class="group flex items-center gap-4 py-2 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-outline-variant" data-icon="history">history</span>
+<span class="font-body-md text-on-surface group-hover:text-gold transition-colors">MKBHD Studio Tour Analysis</span>
+</a>
+</li>
+<li>
+<a class="group flex items-center gap-4 py-2 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-outline-variant" data-icon="history">history</span>
+<span class="font-body-md text-on-surface group-hover:text-gold transition-colors">Algorithm Shift Q3 2024</span>
+</a>
+</li>
+</ul>
+</section>
+<!-- Trending Keywords -->
+<section>
+<h3 class="font-label-md text-label-md text-muted uppercase tracking-widest mb-6">Trending Topics</h3>
+<div class="flex flex-wrap gap-3">
+<button class="px-4 py-2 rounded-full border border-border bg-surface-container-lowest font-label-sm text-label-sm text-on-surface hover:border-gold hover:text-gold transition-colors">AI Filmmaking</button>
+<button class="px-4 py-2 rounded-full border border-border bg-surface-container-lowest font-label-sm text-label-sm text-on-surface hover:border-gold hover:text-gold transition-colors">Creator Economy</button>
+<button class="px-4 py-2 rounded-full border border-border bg-surface-container-lowest font-label-sm text-label-sm text-on-surface hover:border-gold hover:text-gold transition-colors">Sora vs Runway</button>
+<button class="px-4 py-2 rounded-full border border-border bg-surface-container-lowest font-label-sm text-label-sm text-on-surface hover:border-gold hover:text-gold transition-colors">Retention Strategies</button>
+<button class="px-4 py-2 rounded-full border border-border bg-surface-container-lowest font-label-sm text-label-sm text-on-surface hover:border-gold hover:text-gold transition-colors">MrBeast Analytics</button>
+</div>
+</section>
+</div>
+<!-- Right Column: Popular Curations / Editorial Highlight -->
+<div class="md:col-span-8 flex flex-col gap-8 md:pl-12 border-t md:border-t-0 md:border-l border-surface-variant pt-12 md:pt-0">
+<h3 class="font-label-md text-label-md text-muted uppercase tracking-widest mb-2">Curated Collections</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Curation Card 1 -->
+<div class="group relative rounded-xl overflow-hidden aspect-[4/3] cursor-pointer">
+<div class="absolute inset-0 bg-surface-container-high transition-transform duration-700 group-hover:scale-105" data-alt="A striking digital installation art piece featuring glowing, generative geometric shapes suspended in a vast, minimalist gallery space. The room is illuminated by high-key, soft white lighting that creates a bright, modern light-mode aesthetic. The artwork relies on a sophisticated palette of deep blacks and pristine whites, punctuated by intense accents of vibrant red. The mood is serene yet technologically advanced." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD8ZLlG51FEcIpHixGGM_JoWwPbXmru6Fu9f9Uj2t_ax1WM-6jF08XrYJ6tU1D_JPMAyFpHeSVn3wFo28MBnoFfKPcxi6T7IMXExZfwk_jgHqv0cLG8Yn7OKDaSPY-E2dOA59j6M4thvsOmuPMBL6rcXFfrmh8uBj6AMNyILQQXtvnN0nz9ScRElwjGuMO7HAiGlQ0YW1htGgHrlGa8v66NxKrRMp9wldyV1-bfHBE-ZqT_fFpvVqYtbg')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-gold bg-primary/40 backdrop-blur-md px-2 py-1 rounded w-max">AI Spotlight</span>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary">The New Cinematic Standard</h4>
+</div>
+</div>
+<!-- Curation Card 2 -->
+<div class="group relative rounded-xl overflow-hidden aspect-[4/3] cursor-pointer">
+<div class="absolute inset-0 bg-surface-container-high transition-transform duration-700 group-hover:scale-105" data-alt="A sophisticated editorial portrait of a modern digital creator working in a minimalist, sunlit studio overlooking a stylized cityscape. The scene utilizes a high-end luxury aesthetic with stark contrasts between deep shadows and bright, airy whites. Subtle gold accents reflect off sleek camera equipment, emphasizing a quiet, expensive atmosphere free of visual clutter." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCeM-mbeZmPXlx_LVR9yTMb2Xp8CHV4al0YjSXhsf74LyJdAsRFLoCtoqvP7P3DH1qCblzyLxCgffubu07sydlMszxRzTo7SyGrJbZvcrWkPeWNNsZ5zus8nVm2ECW4GDNl7xD5uBKkxcu5DKzwyHGmROGrYnlciSb_xC33C_Pa-mabcvnbaN_oEzVKkErZCTUqumsFLc2WkAHLL1lMrvndPuNhkWrfnjWKKBfJhRBrReDRgJ3ufyBjbA')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-gold bg-primary/40 backdrop-blur-md px-2 py-1 rounded w-max">Deep Dive</span>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary">Monetizing Attention in 2025</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Search Results State (Hidden initially, simulated via JS) -->
+<div class="hidden w-full flex-col gap-12" id="activeSearchResults">
+<div class="flex items-center justify-between border-b border-surface-variant pb-4">
+<h2 class="font-body-lg text-body-lg text-muted">Results for <span class="text-primary font-medium" id="searchQueryDisplay">"AI"</span></h2>
+<div class="flex items-center gap-4">
+<button class="font-label-sm text-label-sm text-on-surface hover:text-gold transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="filter_list">filter_list</span> Filter</button>
+</div>
+</div>
+<!-- Editorial Results Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8">
+<!-- Result Article 1 -->
+<article class="result-item flex flex-col gap-4 group cursor-pointer">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden bg-surface-container">
+<div class="absolute top-4 left-4 z-10">
+<span class="font-label-sm text-label-sm text-on-primary bg-primary px-3 py-1 rounded-sm shadow-sm">Analysis</span>
+</div>
+<img alt="" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" data-alt="A minimalist architectural space featuring a massive floating digital screen displaying elegant data visualizations. The environment is flooded with soft natural light, reflecting off polished white surfaces. The aesthetic is clean, modern, and expensive, utilizing a strict palette of whites, cool greys, and subtle hints of warm gold to convey analytical depth and luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgLK_txw58Pcp7JhiLUdL249r_4DZwhVqMetoiCkGY5PPT2UWdfImVI6raSv0mFjQRjLuByT7ijOjcn3IFEeg191gWwwCC5SXKPmjBgMObalCrgoCvQwCLQNchC6LwjrNIQzMCazB12ybTJq41tymJ4rISOOlBc0j53xykTCLKKqf4QJxmD-rD9zPmpto4dea2TtIBRmm2u4_B6z-H5btHRdHOhh7TMq8CCjdOkowhXjL9GUBJIG2Z3w"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 text-muted font-label-sm text-label-sm">
+<span>Mar 15, 2024</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>8 min read</span>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary group-hover:text-gold transition-colors line-clamp-2">How AI is Rewriting the Rules of Thumbnails</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">An in-depth look at generative models predicting viewer click-through rates before a video even goes live.</p>
+</div>
+</article>
+<!-- Result Article 2 -->
+<article class="result-item flex flex-col gap-4 group cursor-pointer">
+<div class="relative w-full aspect-video rounded-lg overflow-hidden bg-surface-container">
+<div class="absolute top-4 left-4 z-10">
+<span class="font-label-sm text-label-sm text-gold bg-primary-container px-3 py-1 rounded-sm shadow-sm border border-outline-variant/20">Interview</span>
+</div>
+<img alt="" class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" data-alt="A striking portrait of a visionary tech founder set against a pure, bright white studio backdrop. The lighting is crisp and even, eliminating harsh shadows and emphasizing the subject's thoughtful expression. The overall style is reminiscent of high-end editorial magazines, focusing on sharp focus, stark contrast, and a sophisticated, minimalist composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDfMYUSfI56jFS79YJuUJ2ujc_0eB9jGklp6VQupFbi7IJOyEb-sQAoXPniTjgQHBXWZpRYkZDG5wQHZBeB9WdiipHS0mhKp1M879HXd_qXlsV0jY3h_j_r-dsGeOoiSKHm8pcmICM1RfP90ydicxqoNw6oK7l85EEOSF67gSlkusO7yo2bMNtmGnzxDz1ZLOwuyQonIIbwmq0T-4WDki-q0w2liqmtRo3dhlK04q8jk9LDutTBPWwyQ"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 text-muted font-label-sm text-label-sm">
+<span>Mar 12, 2024</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>12 min read</span>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary group-hover:text-gold transition-colors line-clamp-2">The Silent Architect Behind the New Algorithm</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Exclusive conversation with the lead engineer steering the platform's shift towards long-form retention.</p>
+</div>
+</article>
+<!-- Result Article 3 (AI Insight Widget Style) -->
+<article class="result-item flex flex-col justify-between p-6 rounded-xl border border-border bg-surface-container-lowest hover:border-gold/50 transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-bl-full -z-0 transition-transform group-hover:scale-150 duration-700"></div>
+<div class="z-10 flex flex-col gap-4 h-full">
+<div class="flex items-center gap-2 text-gold">
+<span class="material-symbols-outlined" data-icon="auto_awesome" data-weight="fill">auto_awesome</span>
+<span class="font-label-sm text-label-sm tracking-widest uppercase">AI Summary</span>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mt-2">The Consensus on 'AI' in Creator Workflows</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1">Across 42 recent editorial pieces, the prevailing sentiment suggests AI tools are shifting from 'novelty generation' to 'workflow invisible augmentation'. Creators who integrate rather than replace are seeing 3x output stability.</p>
+<div class="pt-4 border-t border-outline-variant/20 mt-auto">
+<span class="font-label-sm text-label-sm text-primary group-hover:text-gold flex items-center gap-1 transition-colors">Read Full Report <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span></span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to simulate search transition
+        const searchInput = document.getElementById('mainSearchInput');
+        const defaultState = document.getElementById('defaultSearchState');
+        const activeResults = document.getElementById('activeSearchResults');
+        const queryDisplay = document.getElementById('searchQueryDisplay');
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            if (val.length > 1) {
+                // Hide default, show results
+                defaultState.classList.add('hidden');
+                activeResults.classList.remove('hidden');
+                activeResults.classList.add('flex');
+                queryDisplay.textContent = `"${val}"`;
+                
+                // Reset animations
+                const items = document.querySelectorAll('.result-item');
+                items.forEach(item => {
+                    item.style.animation = 'none';
+                    item.offsetHeight; /* trigger reflow */
+                    item.style.animation = null; 
+                });
+            } else {
+                // Show default, hide results
+                defaultState.classList.remove('hidden');
+                activeResults.classList.add('hidden');
+                activeResults.classList.remove('flex');
+            }
+        });
+    </script>
+</body></html>

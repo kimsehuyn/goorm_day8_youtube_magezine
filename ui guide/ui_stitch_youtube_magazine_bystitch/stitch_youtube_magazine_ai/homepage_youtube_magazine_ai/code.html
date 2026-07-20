@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>YTMAG AI - High-fidelity journalism for the video age.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "tertiary-container": "#410003",
+                      "surface-container-highest": "#e2e2e2",
+                      "outline-variant": "#c4c7c7",
+                      "on-surface-variant": "#444748",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#000000",
+                      "error": "#ba1a1a",
+                      "surface-tint": "#5f5e5e",
+                      "surface": "#FFFFFF",
+                      "gold": "#E3B341",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#dadada",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "primary-container": "#1c1b1b",
+                      "surface-container-low": "#f3f3f3",
+                      "surface-container": "#eeeeee",
+                      "secondary": "#5f5e5e",
+                      "on-tertiary-fixed-variant": "#93000e",
+                      "on-secondary-fixed-variant": "#474746",
+                      "on-background": "#1a1c1c",
+                      "on-primary-fixed": "#1c1b1b",
+                      "secondary-container": "#e4e2e1",
+                      "on-tertiary-fixed": "#410003",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-secondary-fixed": "#1b1c1c",
+                      "on-tertiary-container": "#f2403c",
+                      "on-primary": "#ffffff",
+                      "background": "#f9f9f9",
+                      "on-error-container": "#93000a",
+                      "primary": "#000000",
+                      "tertiary-fixed": "#ffdad6",
+                      "tertiary-fixed-dim": "#ffb4ac",
+                      "on-secondary-container": "#656464",
+                      "secondary-fixed": "#e4e2e1",
+                      "surface-bright": "#f9f9f9",
+                      "muted": "#666666",
+                      "on-surface": "#1a1c1c",
+                      "error-container": "#ffdad6",
+                      "inverse-surface": "#2f3131",
+                      "surface-container-high": "#e8e8e8",
+                      "inverse-on-surface": "#f1f1f1",
+                      "border": "#ECECEC",
+                      "inverse-primary": "#c8c6c5",
+                      "on-primary-container": "#858383",
+                      "surface-variant": "#e2e2e2",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "outline": "#747878",
+                      "primary-fixed": "#e5e2e1",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "margin-tablet": "32px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px",
+                      "max-width": "1440px",
+                      "content-width": "1200px"
+              },
+              "fontFamily": {
+                      "display-xl": ["Playfair Display"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Playfair Display"],
+                      "headline-lg-mobile": ["Playfair Display"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-xl": ["Playfair Display"],
+                      "display-lg": ["Playfair Display"]
+              },
+              "fontSize": {
+                      "display-xl": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "fontWeight": "700"}],
+                      "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .glass-nav {
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+        .glass-nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(236, 236, 236, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-gold selection:text-primary">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300" id="main-nav">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+<!-- Brand Logo -->
+<a class="font-display-lg text-display-lg tracking-tighter text-primary" href="#">
+                YTMAG AI
+            </a>
+<!-- Desktop Links -->
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-gold pb-1 hover:opacity-80 transition-all duration-300 transform hover:scale-95" href="#">Discover</a>
+<a class="font-label-md text-label-md text-muted hover:text-primary transition-colors hover:opacity-80 duration-300" href="#">Archive</a>
+<a class="font-label-md text-label-md text-muted hover:text-primary transition-colors hover:opacity-80 duration-300" href="#">Rankings</a>
+<a class="font-label-md text-label-md text-muted hover:text-primary transition-colors hover:opacity-80 duration-300" href="#">Channels</a>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center space-x-4 text-primary">
+<button class="hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-outline-variant/30">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A small, circular avatar portrait of a modern user in a bright, minimalist setting, adhering to the clean, high-end light-mode aesthetic of the magazine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiakYiswG2QFgvWxYYIEvqfeDrWNOIon1VVjfUwJEq1a6boAcZbikIk_QkTZaIX8_IhblCNV-cl01iei-Z5lkviW4ibLHQUE06csV7hRC7ftjO5WAjWWPCp1fKC2w45qnQ9GWf98ZzSyb-MQYDtqulIvjCLkJwbTMkRUGwhllhTw30SD9zVps1zCfeTnNeoo3eAgnucXOsm2ltWQiitPAg0arjYpCP2X6r_iM1ahJS6SuSnYfWuEIQLg"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden lg:flex flex-col border-r border-outline-variant h-screen w-64 fixed left-0 top-0 bg-background z-40 pt-24 pb-8 justify-between">
+<div class="px-4">
+<div class="mb-8 px-4">
+<h2 class="font-display-lg text-headline-lg text-gold mb-1">YTMAG</h2>
+<p class="font-label-sm text-label-sm text-muted uppercase tracking-widest">AI Editorial</p>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg transform scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+<span class="font-label-md text-label-md">Trending</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="video_library">video_library</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="subscriptions">subscriptions</span>
+<span class="font-label-md text-label-md">Subscriptions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md text-label-md">History</span>
+</a>
+</nav>
+</div>
+<div class="px-8">
+<button class="w-full py-3 bg-primary text-on-primary font-label-md text-label-md rounded hover:scale-[1.02] transition-transform shadow-[0_20px_40px_rgba(0,0,0,0.04)]">
+                Subscribe Now
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-20">
+<!-- Hero Cover Story -->
+<section class="relative w-full min-h-[85vh] flex items-end pb-24 md:pb-32 px-margin-mobile md:px-margin-desktop bg-surface-container-highest group">
+<div class="absolute inset-0 w-full h-full">
+<img alt="Hero background" class="w-full h-full object-cover" data-alt="A breathtaking, cinematic wide shot of a futuristic server room blended with a sleek, high-end minimalist design studio. The lighting is pristine and high-key, using soft whites and deep blacks to create a modern luxury aesthetic. The mood is calm and analytical, perfectly suited for a premium digital magazine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCThlT1wtNLI-9Zg7Yatepbi0_cYgUoLpa6jw4PXQPlIaS_X_r6y4h-7vlURA6exUBqXFMVWoCT0vRC8_jAe8jqwUzxwOtNbN35s32ryo3oXEUVTEDN7qsAWp1kXQ_OLMpwJ_IkHlFSom5HcYRnQBvvnF-vaRTT1vAoEhSkYSAXYNxRrszHvSsbCf8npjtiTMZp4jcHuq4eavZcvo5EOz_K57QjnAD493ZsW53ixYiW_LB7V9Knn3hNAw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-content-width mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="col-span-1 md:col-span-8 lg:col-span-7">
+<div class="inline-flex items-center px-3 py-1 mb-6 bg-gold/10 border border-gold/30 rounded backdrop-blur-md">
+<span class="font-label-sm text-label-sm text-gold uppercase tracking-widest mr-2">Cover Story</span>
+<span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+</div>
+<h1 class="font-display-xl text-display-xl md:text-[88px] md:leading-[96px] text-primary mb-6">
+                        The Silent Architecture of <br/><span class="text-secondary">Machine Vision.</span>
+</h1>
+<!-- AI Insight Widget -->
+<div class="bg-surface/60 backdrop-blur-xl border border-border p-6 rounded-lg mb-8 max-w-xl shadow-[0_10px_30px_rgba(0,0,0,0.02)]">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-gold text-sm" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-muted uppercase tracking-wider">AI Executive Summary</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                            A deep dive into how large multimodal models are quietly restructuring our spatial awareness. As cameras become cognitive, the design of physical spaces must adapt to algorithmic aesthetics.
+                        </p>
+</div>
+<button class="px-8 py-4 bg-primary text-on-primary font-label-md text-label-md rounded flex items-center gap-2 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-300">
+                        Read Story
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop space-y-32 py-16">
+<!-- Trending Now: Bento Grid Layout -->
+<section>
+<div class="flex justify-between items-end mb-12 border-b border-border pb-4">
+<h2 class="font-headline-xl text-headline-xl text-primary">Trending Now</h2>
+<a class="font-label-md text-label-md text-muted hover:text-primary transition-colors flex items-center gap-1" href="#">
+                        View All <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter auto-rows-[300px]">
+<!-- Large Featured Card -->
+<article class="md:col-span-8 row-span-2 group cursor-pointer relative rounded-xl overflow-hidden bg-surface shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-border flex flex-col justify-end">
+<div class="absolute inset-0 w-full h-full overflow-hidden">
+<img alt="Trending Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A striking portrait of a modern industrial designer in a minimalist studio, illuminated by clean, natural white light. The aesthetic is high-end, utilizing deep blacks, pristine whites, and subtle architectural details, evoking a premium editorial feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXvkV9DcfN7lqBRKHSoYLI1UyjBxcWvjxON0VgvoFZ4DCu4K0mc1qAJG_U0w1EpNjbrHRWabhSKY2z6Ha5mnOzdMBQCyXkmJc4JWI5sCQGRka1bfq_hufoJSYFNRJBEqiUYtTZ1nlLSGfqizaMW4rq3-SM6voc1rX2ZQY5q9w3oTvIEcxd6htnfqy7vpMIJy2j27YurPHQlWwr525ewjg4yHy_b7NR7Uy6a5Ixw2uTPQlSj7uP_6CtZw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
+</div>
+<div class="relative z-10 p-8">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-surface text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-sm">Design</span>
+<div class="bg-surface/20 backdrop-blur-md border border-white/20 px-3 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-white text-xs" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm text-white">98 Insight Score</span>
+</div>
+</div>
+<h3 class="font-headline-xl text-headline-xl text-white mb-3 group-hover:text-gold transition-colors duration-300">Form Follows Algorithm</h3>
+<p class="font-body-md text-body-md text-white/80 max-w-2xl line-clamp-2">How top-tier industrial designers are co-creating with generative AI to produce objects that defy traditional manufacturing constraints.</p>
+</div>
+</article>
+<!-- Stacked Cards -->
+<article class="md:col-span-4 row-span-1 group cursor-pointer bg-surface rounded-xl border border-border overflow-hidden flex shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-transform duration-300">
+<div class="w-2/5 relative overflow-hidden">
+<img alt="Tech Image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close up abstract macro shot of a sleek silicon chip with gold routing on a stark white background. The image is crisp, modern, and minimalist, emphasizing high-end technology in a light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-o1myB-Q2kW3scv2Ulwg9XnqAcPXWrPYq3U46-7etSh6hqZL_loqviP7wZMpbqpzw4e-iKXTA4B6I_Jmzf9H_sUku4o4aDx2xQ6znwBgoap0v5jFpk-XW2ZIdhfzd1QIVZEZoET4uRbwyZwZo28iPUlGD52QIea7OWLM5GOg5HUyQo-_U_3eKOXbJFe_7GiwxYawGV-nYOPL6e-YcDwdlP6rsecP4vRo1IN5RwM586ayxcyG2iE5ZfQ"/>
+</div>
+<div class="w-3/5 p-5 flex flex-col justify-center">
+<span class="text-[10px] font-bold text-gold uppercase tracking-widest mb-2 block">Technology</span>
+<h4 class="font-headline-lg text-headline-lg-mobile text-primary leading-tight mb-2 group-hover:text-gold transition-colors">The Silicon Plateau</h4>
+<p class="font-label-sm text-label-sm text-muted line-clamp-2">Why the next leap in computing power might come from analog architecture.</p>
+</div>
+</article>
+<article class="md:col-span-4 row-span-1 group cursor-pointer bg-surface rounded-xl border border-border overflow-hidden flex shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:-translate-y-1 transition-transform duration-300">
+<div class="w-2/5 relative overflow-hidden">
+<img alt="Culture Image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist architectural photograph of a modern art gallery interior, bathed in soft white light with sharp shadows. The composition relies on deep blacks and clean whites, portraying a luxurious, serene editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp1RFsVAZHkvkKgKuINDP_oAvtIZbH4OhfBRXPdHcW1ZarVH6IwIYzAcjMRlKEZAWZSF927WsjiVtbYTHy3ucbrDpsShd7Fy-ks9XSVGld0Pa289QlhE4eagEDw7eKNkk_jnK7AlAWhV0ZiFymIfIvZznjwwIN7ZyMcqgncY8_khyukkkBAo5OBqxhRAkRxkrQ3nElYPMPSoIRmZ3YB8pBaJeYchDXFbcmMqvO1gvQ57FFp8hN3UfKRA"/>
+</div>
+<div class="w-3/5 p-5 flex flex-col justify-center">
+<span class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-widest mb-2 block">Culture</span>
+<h4 class="font-headline-lg text-headline-lg-mobile text-primary leading-tight mb-2 group-hover:text-on-tertiary-container transition-colors">Curation in the Era of Infinite Content</h4>
+<p class="font-label-sm text-label-sm text-muted line-clamp-2">Navigating the digital deluge.</p>
+</div>
+</article>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant w-full pt-24 pb-12 mt-24">
+<div class="max-w-content-width mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter lg:ml-64">
+<div class="col-span-1 md:col-span-2 mb-12 md:mb-0">
+<div class="font-display-xl text-display-xl text-primary mb-6">YTMAG AI</div>
+<p class="font-body-md text-body-md text-muted max-w-sm">
+                    © 2024 YTMAG AI. High-fidelity journalism for the video age.
+                </p>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-primary mb-4 uppercase tracking-widest">Platform</h5>
+<ul class="space-y-3">
+<li><a class="font-body-md text-body-md text-muted hover:text-gold transition-colors" href="#">About</a></li>
+<li><a class="font-body-md text-body-md text-muted hover:text-gold transition-colors" href="#">Careers</a></li>
+<li><a class="font-body-md text-body-md text-muted hover:text-gold transition-colors" href="#">API</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-primary mb-4 uppercase tracking-widest">Legal</h5>
+<ul class="space-y-3">
+<li><a class="font-body-md text-body-md text-muted hover:text-gold transition-colors" href="#">Privacy</a></li>
+<li><a class="font-body-md text-body-md text-muted hover:text-gold transition-colors" href="#">Terms</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll effect for TopNav glassmorphism
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body></html>

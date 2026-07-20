@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Video Article - YTMAG AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#410003",
+                        "surface-container-highest": "#e2e2e2",
+                        "outline-variant": "#c4c7c7",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#000000",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#5f5e5e",
+                        "surface": "#FFFFFF",
+                        "gold": "#E3B341",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dadada",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "primary-container": "#1c1b1b",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container": "#eeeeee",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary-fixed-variant": "#93000e",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-background": "#1a1c1c",
+                        "on-primary-fixed": "#1c1b1b",
+                        "secondary-container": "#e4e2e1",
+                        "on-tertiary-fixed": "#410003",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-tertiary-container": "#f2403c",
+                        "on-primary": "#ffffff",
+                        "background": "#f9f9f9",
+                        "on-error-container": "#93000a",
+                        "primary": "#000000",
+                        "tertiary-fixed": "#ffdad6",
+                        "tertiary-fixed-dim": "#ffb4ac",
+                        "on-secondary-container": "#656464",
+                        "secondary-fixed": "#e4e2e1",
+                        "surface-bright": "#f9f9f9",
+                        "muted": "#666666",
+                        "on-surface": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2f3131",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-on-surface": "#f1f1f1",
+                        "border": "#ECECEC",
+                        "inverse-primary": "#c8c6c5",
+                        "on-primary-container": "#858383",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "outline": "#747878",
+                        "primary-fixed": "#e5e2e1",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "margin-tablet": "32px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "max-width": "1440px",
+                        "content-width": "1200px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Playfair Display"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-lg": ["20px", { "lineHeight": "32px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .ai-widget {
+            background: linear-gradient(135deg, rgba(227,179,65,0.05) 0%, rgba(227,179,65,0.15) 100%);
+            border: 1px solid rgba(227,179,65,0.2);
+        }
+        .editorial-content p {
+            margin-bottom: 1.5rem;
+            color: theme('colors.on-surface');
+            line-height: 1.8;
+        }
+        .editorial-content h2 {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm glass-nav transition-all duration-300" id="main-nav">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+<div class="flex items-center gap-8">
+<!-- Brand Logo -->
+<a class="font-display-lg text-display-lg tracking-tighter text-primary dark:text-on-surface" href="#">YTMAG AI</a>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center gap-6 font-body-md text-body-md">
+<a class="text-primary dark:text-on-surface font-bold border-b-2 border-gold pb-1 hover:opacity-80 transition-all duration-300" href="#">Discover</a>
+<a class="text-muted dark:text-on-surface-variant hover:text-primary transition-colors hover:opacity-80 transition-all duration-300" href="#">Archive</a>
+<a class="text-muted dark:text-on-surface-variant hover:text-primary transition-colors hover:opacity-80 transition-all duration-300" href="#">Rankings</a>
+<a class="text-muted dark:text-on-surface-variant hover:text-primary transition-colors hover:opacity-80 transition-all duration-300" href="#">Channels</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="notifications" class="text-primary dark:text-on-surface hover:opacity-80 transition-all duration-300 Active: scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="bookmark" class="text-primary dark:text-on-surface hover:opacity-80 transition-all duration-300 Active: scale-95 transition-transform">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container overflow-hidden hover:opacity-80 transition-all duration-300">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A sophisticated minimalist avatar for a user profile, featuring a clean, geometric interpretation of a human face in high contrast black and white with a subtle touch of gold. The background is a soft, pristine light gray, ensuring focus remains on the sharp, modern features. Designed for a luxury digital magazine context, conveying elegance and exclusivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKyglhhGTNJw11sCvM1Ygs4r3gnpc4UC5vD45KiC2dQmHytMp1XqKryY77n5oCR_kG5EjDaI4QpoYwNk2ZvRmFDMjWrm_hTDfDU6_vSwdAdRlsFv8anAUFdSByvlOSf0JEV8elhNfyUTRSIwpQiR_Kph6dUohgKMl4sh5pCL5UTHruqc-PSFKxZemc4G49kv3FAbrMQoQ6WjFj5FBhuoQTs5LYyIZbo0Zk2hq6mKDtk7LQ2yZXHVn1Pg"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-20">
+<!-- Hero Section -->
+<section class="w-full relative bg-surface-container-lowest border-b border-border">
+<div class="max-w-content-width mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-24">
+<div class="mb-8">
+<span class="text-gold font-label-md text-label-md uppercase tracking-widest mb-4 block">Architecture &amp; Design</span>
+<h1 class="font-display-xl text-display-xl text-primary mb-6">The Brutalist Revival: Why Concrete is Conquering the Digital Canvas</h1>
+<p class="font-body-lg text-body-lg text-muted max-w-3xl">An exploration of how stark, unyielding architectural forms are being translated into fluid, interactive digital environments by a new wave of generative designers.</p>
+</div>
+<div class="relative w-full aspect-video bg-surface-dim rounded-xl overflow-hidden shadow-sm group">
+<img alt="Video thumbnail" class="w-full h-full object-cover" data-alt="A sweeping, cinematic wide shot of a massive, imposing brutalist concrete structure set against a stark, pale sky. The architecture is characterized by severe geometric lines, deep shadows, and raw textures. In the foreground, subtle digital glitches or glowing gold geometric overlays suggest a fusion of physical architecture and digital generative art. The lighting is dramatic, high-contrast, casting long, sharp shadows across the concrete facade. A premium, minimalist aesthetic suitable for a high-end editorial feature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvMcXegmyduSf992ybJmTkdnDvKBb0O5h7ZVzUA6lEyG9Pcvhutn9ekuoxyT8txNjXhOMyeGfJE86De9ilz5zNXPXKk1SgZwmE0saygxUPcardyByBMQ7X-zUWLe62ou2ivMSMRF4VCk4a5yameBZX79KStcJQ1TOqH6DVvZmzcdrAC-EVpztIzhBdZT2-WtAKaMQtl2lDQgKSVDM35XvlpC_Gt1WVWe0KR7MOBiCOwmLF276XGd8bSQ"/>
+<div class="absolute inset-0 bg-primary/20 flex items-center justify-center transition-opacity group-hover:bg-primary/30">
+<button class="w-20 h-20 bg-surface rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-primary text-[40px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between mt-6 border-b border-border pb-6">
+<div class="flex items-center gap-4">
+<img alt="Author portrait" class="w-12 h-12 rounded-full object-cover" data-alt="A refined, minimalist headshot of a contemporary design critic or digital artist, set against a clean, bright studio background. They are wearing simple, modern dark clothing. The lighting is soft and flattering, creating a sophisticated and professional mood appropriate for a high-end cultural magazine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbKmlF2I-xCSDB7EcK7aROuaDzDt2ONfowvBPsAt4Lz0pYfugjAfC3FawUxWg9euad0sTrRrF_gT426ajgUc8eXnB1Ba0lylK0cOPtAW82m-36Bhb6pnwnX4B1a3Ea1ZXQe8K7RHhbgIFPO52oynSDQmB0AHffQf1K0Z0vbzX_OGATzF2ppqFOI5QfjtS0k8wJi8hfxxCsiRGP1_ISpBqJquTcV4KyY71Dj2679LZMV3jc6ykBj7MRHg"/>
+<div>
+<p class="font-label-md text-label-md text-primary">By Elena Rostova</p>
+<p class="font-label-sm text-label-sm text-muted">Published Oct 24, 2024 • 12 min read</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full border border-border flex items-center justify-center text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-border flex items-center justify-center text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Article Body with Sidebar -->
+<div class="max-w-content-width mx-auto px-margin-mobile md:px-margin-desktop py-16 flex flex-col lg:flex-row gap-gutter relative">
+<!-- Sticky Sidebar (Table of Contents) -->
+<aside class="hidden lg:block w-64 flex-shrink-0">
+<div class="sticky top-32">
+<h3 class="font-label-md text-label-md text-muted uppercase tracking-widest mb-6">In This Article</h3>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-primary hover:text-gold transition-colors font-medium border-l-2 border-gold pl-4" href="#ai-summary">AI Summary</a></li>
+<li><a class="font-body-md text-body-md text-muted hover:text-primary transition-colors border-l-2 border-transparent pl-4" href="#key-insights">Key Insights</a></li>
+<li><a class="font-body-md text-body-md text-muted hover:text-primary transition-colors border-l-2 border-transparent pl-4" href="#why-it-matters">Why It Matters</a></li>
+<li><a class="font-body-md text-body-md text-muted hover:text-primary transition-colors border-l-2 border-transparent pl-4" href="#the-new-canvas">The New Canvas</a></li>
+<li><a class="font-body-md text-body-md text-muted hover:text-primary transition-colors border-l-2 border-transparent pl-4" href="#related-videos">Related Videos</a></li>
+</ul>
+</div>
+</aside>
+<!-- Main Editorial Content -->
+<article class="flex-grow max-w-[800px] editorial-content">
+<!-- AI Summary Widget -->
+<div class="ai-widget rounded-xl p-8 mb-12 relative overflow-hidden" id="ai-summary">
+<div class="absolute top-4 right-4 text-gold opacity-50">
+<span class="material-symbols-outlined text-[32px]">auto_awesome</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-gold">smart_toy</span>
+                        AI Summary
+                    </h3>
+<p class="font-body-md text-body-md text-on-surface-variant m-0">
+                        This video essay argues that brutalism is experiencing a renaissance not in physical cityscapes, but within digital user interfaces and virtual environments. The creator demonstrates how the stark, uncompromising aesthetics of mid-century concrete architecture provide a functional counterpoint to the overly polished, soft-edged design trends dominating current web platforms.
+                    </p>
+</div>
+<!-- GPT Editorial Text -->
+<p class="font-body-lg text-body-lg first-letter:float-left first-letter:text-[80px] first-letter:pr-2 first-letter:font-display-xl first-letter:leading-[64px] first-letter:text-primary">
+                    For decades, brutalism was the architectural equivalent of a scowl—imposing, gray, and aggressively functional. Yet, as we navigate an increasingly frictionless, sanitized digital world full of soft gradients and rounded corners, there is a growing hunger for friction. A desire for digital spaces that feel substantial, heavy, and unapologetically raw.
+                </p>
+<p>
+                    The video above, curated from the channels of leading architectural theorists turned digital designers, highlights a fascinating pivot. We are seeing a rejection of "corporate memphis" illustration and glassmorphic softness in favor of harsh grids, monospaced typography, and stark, high-contrast layouts.
+                </p>
+<!-- Key Insights Widget (Bento Style) -->
+<div class="my-16" id="key-insights">
+<h2 class="font-headline-xl text-headline-xl text-primary mb-8">Key Insights</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-gold text-[32px] mb-4">architecture</span>
+<h4 class="font-headline-lg text-headline-lg text-primary mb-2 text-xl">Structural Honesty</h4>
+<p class="font-body-md text-body-md text-muted m-0">Digital brutalism exposes the underlying framework of the web, much like physical brutalism exposes concrete forms without plaster.</p>
+</div>
+<div class="bg-surface border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-gold text-[32px] mb-4">contrast</span>
+<h4 class="font-headline-lg text-headline-lg text-primary mb-2 text-xl">High Contrast Utility</h4>
+<p class="font-body-md text-body-md text-muted m-0">Escewing subtle shades for stark black and white creates immediate visual hierarchy, improving accessibility for critical tasks.</p>
+</div>
+</div>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-primary" id="why-it-matters">Why It Matters</h2>
+<p>
+                    This isn't merely an aesthetic trend; it's a functional reaction. As digital platforms become central to complex workflows—from coding environments to high-frequency trading dashboards—users require interfaces that prioritize legibility and data density over comforting visuals. The "brutalist" UI strips away the decorative, presenting information with a frankness that commands attention.
+                </p>
+<blockquote class="border-l-4 border-gold pl-6 py-2 my-10 bg-surface-container-lowest">
+<p class="font-display-lg text-display-lg text-[32px] leading-[40px] text-primary m-0 italic">"We are designing digital structures that don't try to hide their machinery. They are honest, heavy, and built for purpose."</p>
+</blockquote>
+<h2 class="font-headline-xl text-headline-xl text-primary" id="the-new-canvas">The New Canvas</h2>
+<p>
+                    What remains to be seen is how this harsh aesthetic integrates with the fluid, conversational nature of AI interfaces. Can the rigid structure of a brutalist grid contain the dynamic, unpredictable outputs of a generative model? The designers featured in this essay suggest that the answer is not to soften the edges, but to build stronger, more imposing containers for the data.
+                </p>
+</article>
+</div>
+<!-- Related Videos Section -->
+<section class="bg-surface border-t border-border py-24" id="related-videos">
+<div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex justify-between items-end mb-12">
+<h2 class="font-headline-xl text-headline-xl text-primary">Related Viewing</h2>
+<a class="font-label-md text-label-md text-gold hover:text-primary transition-colors flex items-center gap-1" href="#">
+                        View Archive <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Video Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden mb-4 bg-surface-dim">
+<img alt="Related video 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A stylized, high-contrast black and white architectural photograph of a spiral staircase rendered in raw concrete. Deep shadows emphasize the geometric perfection of the curve. A subtle gold accent graphic overlays the image, indicating data or measurement. The mood is precise, analytical, and distinctly modern, fitting for a sophisticated design publication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO4XZ50laBaQ35ThUT8YDOA20Svp1AoZYwaglIGG2waz5qMnZDEamTzNjCHADIcgKGUfFBz6PCGItTYybTZxwFsf5YhsqiTwAltSmiRFO0yqsYiMQUULfHUrNOGpMUB1SEUTnhmBkZDuBvqnrP6p17vNsoLXIfA7qAPUKJ-FFnYV5-IUc26W0MhcPUodbqdsnTORA2kN-2tH3SOUyv10jyrCr9lAm9qwg3JNTbY0orAYmgPLtyWYB0Gg"/>
+<div class="absolute bottom-3 right-3 bg-primary/80 backdrop-blur-md px-2 py-1 rounded text-on-primary font-label-sm text-label-sm">
+                                14:20
+                            </div>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-[20px] leading-[28px] text-primary mb-2 group-hover:text-gold transition-colors">The Geometry of Silence</h3>
+<p class="font-body-md text-body-md text-muted text-sm">Examining acoustic spaces in digital realms.</p>
+</div>
+<!-- Video Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden mb-4 bg-surface-dim">
+<img alt="Related video 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist digital rendering of a sleek, dark-themed user interface dashboard floating in an abstract, dimly lit void. The UI elements are composed of sharp lines, stark typography, and sparse, highly saturated red and gold data visualizations. The lighting is focused purely on the glowing interface, conveying a sense of intense focus and advanced technology in a premium setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIrIQUL9LMd4U4xrrT1zXAA-78-O-wR0GVvgroDtcq9iP2AnpgdDyYqFHYvu8QcejFDreZ0ZghvLrwBi_R5VGOAZ0fQfU3ZtRC4sFUoZGuRiyG-ioX7kIPSmou7auyTTJKxvyqwH1-RRJcPNLoFciEqD4CiAcfy9o8gtfhONmZ-9QjzGpbPpCxlKfAQtWthxapKbUdTwitAcrWbpvY19JAdU3fQjn5kM3-CFLuUuUs5bNN8HvFzbw8qQ"/>
+<div class="absolute bottom-3 right-3 bg-primary/80 backdrop-blur-md px-2 py-1 rounded text-on-primary font-label-sm text-label-sm">
+                                08:45
+                            </div>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-[20px] leading-[28px] text-primary mb-2 group-hover:text-gold transition-colors">Data Density by Design</h3>
+<p class="font-body-md text-body-md text-muted text-sm">Why high-information environments demand starker UI.</p>
+</div>
+<!-- Video Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-lg overflow-hidden mb-4 bg-surface-dim">
+<img alt="Related video 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A close-up, highly detailed shot of a textured concrete wall, illuminated by a sharp, diagonal slice of bright, warm light. In the shadow, subtle, glowing generative art patterns seem to emerge from the rough surface. The juxtaposition of natural, rugged material with ethereal digital light creates a compelling, luxurious, and slightly mysterious aesthetic suitable for a high-end cultural critique." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-J0utHooBgxjE94I5gduBC5By6r7K2bM1WzwPwKq9__0lO0SZSj-0a4YDXFE73YxIq7Hz8S7Ewrhk0sfdQRg1qd4PCfNJOnYwCOVxpi-FZUC5zo0-RVwTHQ6qSQ8XBkaRjfWU4p2Om2BHOEbXzBoL10FjFbX2EdRdz5noJAXKIpZTeb0JwbvYrJvjEHI8WoBUyDQhDRF_g6M2sEUhCOpObZtEpf3lv-lZO4pw_ECzZIxvS6W6Dg4GrQ"/>
+<div class="absolute bottom-3 right-3 bg-primary/80 backdrop-blur-md px-2 py-1 rounded text-on-primary font-label-sm text-label-sm">
+                                22:10
+                            </div>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-[20px] leading-[28px] text-primary mb-2 group-hover:text-gold transition-colors">Materializing the Virtual</h3>
+<p class="font-body-md text-body-md text-muted text-sm">Textures and tactility in the metaverse era.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full pt-24 pb-12 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant">
+<div class="max-w-content-width mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-1 mb-8 md:mb-0">
+<a class="font-display-xl text-display-xl text-primary text-[40px] leading-[48px] block mb-4" href="#">YTMAG</a>
+<p class="font-body-md text-body-md text-muted">High-fidelity journalism for the video age.</p>
+</div>
+<div class="md:col-span-2 flex flex-wrap gap-x-8 gap-y-4">
+<a class="font-body-md text-body-md text-muted dark:text-on-surface-variant hover:text-gold transition-colors" href="#">About</a>
+<a class="font-body-md text-body-md text-muted dark:text-on-surface-variant hover:text-gold transition-colors" href="#">Careers</a>
+<a class="font-body-md text-body-md text-muted dark:text-on-surface-variant hover:text-gold transition-colors" href="#">Privacy</a>
+<a class="font-body-md text-body-md text-muted dark:text-on-surface-variant hover:text-gold transition-colors" href="#">Terms</a>
+<a class="font-body-md text-body-md text-muted dark:text-on-surface-variant hover:text-gold transition-colors" href="#">API</a>
+</div>
+<div class="md:col-span-1 flex justify-end items-end md:items-start text-right">
+<p class="font-body-md text-body-md text-muted text-sm">© 2024 YTMAG AI.</p>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll handling for top nav blur effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body></html>
